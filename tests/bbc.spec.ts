@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('BBC homepage has BBC in title and opens news', async ({ page }) => {
+test('BBC homepage opens News successfully', async ({ page }) => {
 await page.goto('https://www.bbc.co.uk');
 
 // await page.getByTestId('accept-button').click();
