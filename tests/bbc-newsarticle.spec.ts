@@ -1,17 +1,24 @@
-// Running in GitHub Actions
-
 import { test, expect } from '@playwright/test';
 
-test('User can navigate from BBC homepage to a news article', async ({ page }) => {
+test('User can navigate to England news', async ({ page }) => {
   await page.goto('https://www.bbc.co.uk/');
+
+  const acceptCookies = page.getByRole('button', {
+    name: /Accept additional cookies/i
+  });
+
+  if (await acceptCookies.isVisible().catch(() => false)) {
+    await acceptCookies.click();
+  }
 
   await page.getByRole('link', { name: 'News' }).first().click();
 
   await expect(page).toHaveURL(/news/);
 
-  await page.getByRole('link', { name: 'Live .  UK announces' }).click();
+  await page
+    .getByTestId('navigation')
+    .getByRole('link', { name: 'England' })
+    .click();
 
-  await expect(page).toHaveURL(/news/);
-
-  await expect(page.getByRole('heading').first()).toBeVisible();
+  await expect(page).toHaveURL(/england/i);
 });
