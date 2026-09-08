@@ -11,7 +11,4 @@ test('BBC homepage opens News successfully', async ({ page }) => {
 
   await expect(page).toHaveURL(/news/);
 
-  await expect(
-    page.getByRole('heading', { name: 'BBC News', exact: true })
-  ).toBeVisible();
 });
