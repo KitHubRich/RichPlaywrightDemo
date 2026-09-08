@@ -1,3 +1,5 @@
+// Running in GitHub Actions
+
 import { test, expect } from '@playwright/test';
 
 test('User can navigate from BBC homepage to a news article', async ({ page }) => {
