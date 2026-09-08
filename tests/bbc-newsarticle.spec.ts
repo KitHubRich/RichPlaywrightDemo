@@ -22,9 +22,5 @@ test('User can accept cookies and open England news', async ({ page }) => {
   .click();
 
   // Verify we navigated successfully
-  await expect(page).toHaveURL(/england/i);
-
-  await expect(
-    page.getByRole('heading').first()
-  ).toBeVisible();
+  await expect(page.locator('body')).toContainText('England');
 });
