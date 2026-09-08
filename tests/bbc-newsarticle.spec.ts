@@ -13,12 +13,17 @@ test('User can accept cookies and open England news', async ({ page }) => {
 
   await expect(page).toHaveURL(/news/);
 
-  await page
+  await expect(page.getByTestId('navigation')).toBeVisible();
+
+  const englandLink = page
     .getByTestId('navigation')
-    .getByRole('link', { name: 'England' })
-    .click();
+    .getByRole('link', { name: 'England' });
+
+  await expect(englandLink).toBeVisible();
+
+  await englandLink.click();
 
   await expect(page).toHaveURL(/england/i);
 
-  await expect(page.locator('body')).toContainText('England');
+  await expect(page.getByRole('heading').first()).toBeVisible();
 });
