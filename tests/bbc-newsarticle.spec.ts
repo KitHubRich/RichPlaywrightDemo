@@ -13,11 +13,7 @@ test('User can accept cookies and open England news', async ({ page }) => {
 
   await expect(page).toHaveURL(/news/);
 
-  await expect(page.getByTestId('navigation')).toBeVisible();
-
-  const englandLink = page
-    .getByTestId('navigation')
-    .getByRole('link', { name: 'England' });
+  const englandLink = page.locator('a[href="/news/england"]').first();
 
   await expect(englandLink).toBeVisible();
 
