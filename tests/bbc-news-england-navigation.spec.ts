@@ -11,7 +11,7 @@ test('BBC News England navigation works correctly', async ({ page }) => {
 
   await page.getByRole('link', { name: 'News' }).first().click();
 
-  await page.getByRole('navigation')
+await page.getByTestId('navigation')
   .getByRole('link', { name: 'England' })
   .click();
 
