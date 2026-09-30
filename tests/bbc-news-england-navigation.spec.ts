@@ -11,7 +11,9 @@ test('BBC News England navigation works correctly', async ({ page }) => {
 
   await page.getByRole('link', { name: 'News' }).first().click();
 
-  await page.getByRole('link', { name: 'England' }).first().click();
+  await page.getByRole('navigation')
+  .getByRole('link', { name: 'England' })
+  .click();
 
   await expect(page).toHaveURL(/england/);
 });
