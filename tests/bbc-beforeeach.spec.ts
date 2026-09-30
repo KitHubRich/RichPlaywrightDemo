@@ -1,4 +1,3 @@
-// beforeEach practice exercise
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
@@ -11,14 +10,20 @@ test.beforeEach(async ({ page }) => {
   }
 });
 
-test('News link is visible', async ({ page }) => {
-  await expect(
-    page.getByRole('link', { name: 'News' }).first()
-  ).toBeVisible();
-});
-
 test('News navigation works', async ({ page }) => {
   await page.getByRole('link', { name: 'News' }).first().click();
 
   await expect(page).toHaveURL(/news/);
+});
+
+test('Sport navigation works', async ({ page }) => {
+  await page.getByRole('link', { name: 'Sport' }).first().click();
+
+  await expect(page).toHaveURL(/sport/);
+});
+
+test('Weather navigation works', async ({ page }) => {
+  await page.getByRole('link', { name: 'Weather' }).first().click();
+
+  await expect(page).toHaveURL(/weather/);
 });
