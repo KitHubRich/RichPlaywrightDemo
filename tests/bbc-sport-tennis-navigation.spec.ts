@@ -13,7 +13,10 @@ test('BBC Sport navigates to Tennis', async ({ page }) => {
 
   await expect(page).toHaveURL(/sport/);
 
-  await page.getByRole('link', { name: 'Tennis' }).click();
+  await page
+  .getByTestId('navigation')
+  .getByRole('link', { name: 'Tennis' })
+  .click();
 
   await expect(page).toHaveURL(/tennis/);
 });
