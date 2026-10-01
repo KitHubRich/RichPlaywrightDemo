@@ -11,10 +11,9 @@ test('BBC News search returns Alcaraz results', async ({ page }) => {
     await acceptButton.click();
   }
 
-  await page
-    .getByTestId('header-content')
-    .getByRole('link', { name: 'News' })
-    .click();
+await page.getByRole('link', { name: 'News' }).first().click();
+
+await expect(page).toHaveURL(/news/);
 
   await page.getByRole('link', { name: 'Search BBC' }).click();
 
