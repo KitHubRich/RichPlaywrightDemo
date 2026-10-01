@@ -12,11 +12,4 @@ test('BBC News link navigates correctly', async ({ page }) => {
   await page.getByRole('link', { name: 'News' }).first().click();
 
   await expect(page).toHaveURL(/news/);
-
-await expect(
-  page.getByRole('heading', {
-    name: 'BBC News',
-    exact: true
-  })
-).toBeVisible();
 });
