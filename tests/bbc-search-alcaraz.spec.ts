@@ -15,6 +15,8 @@ await page.getByRole('link', { name: 'News' }).first().click();
 
 await expect(page).toHaveURL(/news/);
 
+await page.waitForLoadState('networkidle');
+
   await page.getByRole('link', { name: 'Search BBC' }).click();
 
   await page
