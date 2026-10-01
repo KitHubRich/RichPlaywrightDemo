@@ -5,7 +5,11 @@ test('BBC News search returns Alcaraz results', async ({ page }) => {
 
   await page.goto('https://www.bbc.co.uk/');
 
-  await page.getByTestId('accept-button').click();
+  const acceptButton = page.getByTestId('accept-button');
+
+  if (await acceptButton.isVisible().catch(() => false)) {
+    await acceptButton.click();
+  }
 
   await page
     .getByTestId('header-content')
