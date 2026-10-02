@@ -9,10 +9,13 @@ test.beforeEach(async ({ page }) => {
     await acceptButton.click();
   }
 
-  await page
-    .getByTestId('header-content')
-    .getByRole('link', { name: 'Sport' })
-    .click();
+const sportLink = page
+  .getByTestId('header-content')
+  .getByRole('link', { name: 'Sport' });
+
+await expect(sportLink).toBeVisible();
+
+await sportLink.click();
 
   await page.getByRole('link', { name: 'Search BBC' }).click();
 });
