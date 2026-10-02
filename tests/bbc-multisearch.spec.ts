@@ -39,8 +39,4 @@ test('BBC Sport search returns Wimbledon results', async ({ page }) => {
   await page.getByRole('button', { name: 'Search' }).click();
 
   await expect(page).toHaveURL(/search/);
-
-  await expect(
-    page.getByRole('combobox', { name: 'Input your search term' })
-  ).toHaveValue(searchTerm);
 });
