@@ -15,7 +15,7 @@ const sportLink = page
 
 await expect(sportLink).toBeVisible();
 
-await sportLink.click();
+await page.getByRole('link', { name: 'Sport' }).first().click();
 
   await page.getByRole('link', { name: 'Search BBC' }).click();
 });
