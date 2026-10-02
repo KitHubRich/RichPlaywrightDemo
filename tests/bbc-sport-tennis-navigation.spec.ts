@@ -8,6 +8,7 @@ test('BBC Sport navigates to Tennis', async ({ page }) => {
   if (await acceptButton.isVisible().catch(() => false)) {
     await acceptButton.click();
   }
+ await expect(page.getByRole('link', { name: 'Sport' }).first()).toBeVisible();
 
   await page.getByRole('link', { name: 'Sport' }).first().click();
 
