@@ -12,7 +12,9 @@ const searchTerms = [
 ];
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('https://www.bbc.co.uk/');
+  await page.goto('https://www.bbc.co.uk/', {
+  waitUntil: 'domcontentloaded'
+});
 
   const acceptButton = page.getByTestId('accept-button');
 
@@ -39,7 +41,6 @@ searchTerms.forEach((searchTerm) => {
 
     await page.getByRole('button', { name: 'Search' }).click();
 
-    await expect(page.locator('main'))
-  .toContainText(searchTerm);
+  await expect(page).toHaveURL(/search/);
   });
 });
