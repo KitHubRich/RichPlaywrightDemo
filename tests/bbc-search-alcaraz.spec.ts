@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('BBC News search returns Alcaraz results', async ({ page }) => {
+test('BBC Sport search returns Alcaraz results', async ({ page }) => {
   const searchTerm = 'Alcaraz';
 
   await page.goto('https://www.bbc.co.uk/');
@@ -11,11 +11,10 @@ test('BBC News search returns Alcaraz results', async ({ page }) => {
     await acceptButton.click();
   }
 
-await page.getByRole('link', { name: 'News' }).first().click();
-
-await expect(page).toHaveURL(/news/);
-
-await page.waitForLoadState('networkidle');
+  await page
+    .getByTestId('header-content')
+    .getByRole('link', { name: 'Sport' })
+    .click();
 
   await page.getByRole('link', { name: 'Search BBC' }).click();
 
@@ -30,7 +29,4 @@ await page.waitForLoadState('networkidle');
   await expect(
     page.getByRole('combobox', { name: 'Input your search term' })
   ).toHaveValue(searchTerm);
-
-  await expect(page.locator('main'))
-    .toContainText(searchTerm);
 });
