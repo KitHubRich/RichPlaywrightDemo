@@ -1,5 +1,16 @@
 import { test, expect } from '@playwright/test';
 
+const searchTerms = [
+  'Alcaraz',
+  'Wimbledon',
+  'Boulter',
+  'Potapova',
+  'Bublik',
+  'Sinner',
+  'Swiatek',
+  'Raducanu'
+];
+
 test.beforeEach(async ({ page }) => {
   await page.goto('https://www.bbc.co.uk/');
 
@@ -9,97 +20,26 @@ test.beforeEach(async ({ page }) => {
     await acceptButton.click();
   }
 
-  const sportLink = page
-    .getByTestId('header-content')
-    .getByRole('link', { name: 'Sport' });
+const sportLink = page
+  .getByRole('link', { name: 'Sport' })
+  .first();
 
-  await expect(sportLink).toBeVisible();
+await expect(sportLink).toBeVisible();
 
-  await page.getByRole('link', { name: 'Sport' }).first().click();
+await sportLink.click();
 
   await page.getByRole('link', { name: 'Search BBC' }).click();
 });
 
-test('BBC Sport search returns Alcaraz results', async ({ page }) => {
-  const searchTerm = 'Alcaraz';
+searchTerms.forEach((searchTerm) => {
+  test(`BBC Sport search returns ${searchTerm} results`, async ({ page }) => {
+    await page
+      .getByRole('combobox', { name: 'Input your search term' })
+      .fill(searchTerm);
 
-  await page
-    .getByRole('combobox', { name: 'Input your search term' })
-    .fill(searchTerm);
+    await page.getByRole('button', { name: 'Search' }).click();
 
-  await page.getByRole('button', { name: 'Search' }).click();
-
-  await expect(page).toHaveURL(/search/);
-});
-
-test('BBC Sport search returns Wimbledon results', async ({ page }) => {
-  const searchTerm = 'Wimbledon';
-
-  await page
-    .getByRole('combobox', { name: 'Input your search term' })
-    .fill(searchTerm);
-
-  await page.getByRole('button', { name: 'Search' }).click();
-
-  await expect(page).toHaveURL(/search/);
-});
-
-test('BBC Sport search returns Boulter results', async ({ page }) => {
-  const searchTerm = 'Boulter';
-
-  await page
-    .getByRole('combobox', { name: 'Input your search term' })
-    .fill(searchTerm);
-
-  await page.getByRole('button', { name: 'Search' }).click();
-
-  await expect(page).toHaveURL(/search/);
-});
-
-test('BBC Sport search returns Potapova results', async ({ page }) => {
-  const searchTerm = 'Potapova';
-
-  await page
-    .getByRole('combobox', { name: 'Input your search term' })
-    .fill(searchTerm);
-
-  await page.getByRole('button', { name: 'Search' }).click();
-
-  await expect(page).toHaveURL(/search/);
-});
-
-test('BBC Sport search returns Bublik results', async ({ page }) => {
-  const searchTerm = 'Bublik';
-
-  await page
-    .getByRole('combobox', { name: 'Input your search term' })
-    .fill(searchTerm);
-
-  await page.getByRole('button', { name: 'Search' }).click();
-
-  await expect(page).toHaveURL(/search/);
-});
-
-test('BBC Sport search returns Sinner results', async ({ page }) => {
-  const searchTerm = 'Sinner';
-
-  await page
-    .getByRole('combobox', { name: 'Input your search term' })
-    .fill(searchTerm);
-
-  await page.getByRole('button', { name: 'Search' }).click();
-
-  await expect(page).toHaveURL(/search/);
-});
-
-test('BBC Sport search returns Swiatek results', async ({ page }) => {
-  const searchTerm = 'Swiatek';
-
-  await page
-    .getByRole('combobox', { name: 'Input your search term' })
-    .fill(searchTerm);
-
-  await page.getByRole('button', { name: 'Search' }).click();
-
-  await expect(page).toHaveURL(/search/);
+    await expect(page.locator('main'))
+  .toContainText(searchTerm);
+  });
 });
