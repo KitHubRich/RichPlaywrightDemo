@@ -3,6 +3,8 @@ import { test, expect } from '@playwright/test';
 const searchTerms = [
   'Alcaraz',
   'Potapova',
+  'Bublik',
+  'Boulter',
 ];
 
 test.beforeEach(async ({ page }) => {
