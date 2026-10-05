@@ -42,9 +42,9 @@ export default defineConfig({
     },
 
     //{
-   //   name: 'firefox',
-   //   use: { ...devices['Desktop Firefox'] },
-   // },
+    //  name: 'firefox',
+    //  use: { ...devices['Desktop Firefox'] },
+    //},
 
     {
       name: 'webkit',

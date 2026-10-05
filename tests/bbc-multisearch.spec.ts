@@ -5,6 +5,7 @@ const searchTerms = [
   'Potapova',
   'Bublik',
   'Boulter',
+  'Wimbledon',
 ];
 
 test.beforeEach(async ({ page }) => {
