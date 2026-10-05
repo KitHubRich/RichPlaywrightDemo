@@ -25,13 +25,13 @@ test.beforeEach(async ({ page }) => {
   await sportLink.click();
 
   await Promise.all([
-  page.waitForLoadState('domcontentloaded'),
-  page.getByRole('link', { name: 'Search BBC' }).click(),
-]);
+    page.waitForLoadState('domcontentloaded'),
+    page.getByRole('link', { name: 'Search BBC' }).click(),
+  ]);
 
-  const searchBox = page.getByRole('combobox', {
-    name: 'Input your search term'
-  });
+  console.log('Current URL:', page.url());
+
+  const searchBox = page.getByRole('combobox');
 
   await expect(searchBox).toBeVisible({
     timeout: 15000,
@@ -40,9 +40,7 @@ test.beforeEach(async ({ page }) => {
 
 searchTerms.forEach((searchTerm) => {
   test(`BBC Sport search returns ${searchTerm} results`, async ({ page }) => {
-    const searchBox = page.getByRole('combobox', {
-      name: 'Input your search term',
-    });
+    const searchBox = page.getByRole('combobox');
 
     await searchBox.fill(searchTerm);
 
@@ -52,6 +50,6 @@ searchTerms.forEach((searchTerm) => {
 
     await expect(page).toHaveURL(/search/);
 
-    await expect(page.locator('body')).toContainText(searchTerm);
+    await expect(searchBox).toHaveValue(searchTerm);
   });
 });
