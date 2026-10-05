@@ -24,7 +24,10 @@ test.beforeEach(async ({ page }) => {
 
   await sportLink.click();
 
-  await page.getByRole('link', { name: 'Search BBC' }).click();
+  await Promise.all([
+  page.waitForLoadState('domcontentloaded'),
+  page.getByRole('link', { name: 'Search BBC' }).click(),
+]);
 
   const searchBox = page.getByRole('combobox', {
     name: 'Input your search term'
