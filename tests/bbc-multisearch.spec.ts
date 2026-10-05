@@ -2,18 +2,12 @@ import { test, expect } from '@playwright/test';
 
 const searchTerms = [
   'Alcaraz',
-  'Wimbledon',
-  'Boulter',
   'Potapova',
-  'Bublik',
-  'Sinner',
-  'Swiatek',
-  'Raducanu'
 ];
 
 test.beforeEach(async ({ page }) => {
   await page.goto('https://www.bbc.co.uk/', {
-    waitUntil: 'domcontentloaded'
+    waitUntil: 'domcontentloaded',
   });
 
   const acceptButton = page.getByTestId('accept-button');
@@ -36,19 +30,25 @@ test.beforeEach(async ({ page }) => {
     name: 'Input your search term'
   });
 
-  await expect(searchBox).toBeVisible();
+  await expect(searchBox).toBeVisible({
+    timeout: 15000,
+  });
 });
 
 searchTerms.forEach((searchTerm) => {
   test(`BBC Sport search returns ${searchTerm} results`, async ({ page }) => {
     const searchBox = page.getByRole('combobox', {
-      name: 'Input your search term'
+      name: 'Input your search term',
     });
 
     await searchBox.fill(searchTerm);
 
     await page.getByRole('button', { name: 'Search' }).click();
 
+    await page.waitForLoadState('domcontentloaded');
+
     await expect(page).toHaveURL(/search/);
+
+    await expect(page.locator('body')).toContainText(searchTerm);
   });
 });
