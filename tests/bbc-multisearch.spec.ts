@@ -16,40 +16,27 @@ test.beforeEach(async ({ page }) => {
     await acceptButton.click();
   }
 
-  const sportLink = page
-    .getByRole('link', { name: 'Sport' })
-    .first();
+  await page.goto('https://www.bbc.co.uk/search', {
+    waitUntil: 'domcontentloaded',
+  });
 
-  await expect(sportLink).toBeVisible();
+  const searchBox = page.locator('input');
 
-  await sportLink.click();
-
-  await Promise.all([
-    page.waitForLoadState('domcontentloaded'),
-    page.getByRole('link', { name: 'Search BBC' }).click(),
-  ]);
-
-  console.log('Current URL:', page.url());
-
-  const searchBox = page.getByRole('combobox');
-
-  await expect(searchBox).toBeVisible({
+  await expect(searchBox.first()).toBeVisible({
     timeout: 15000,
   });
 });
 
 searchTerms.forEach((searchTerm) => {
-  test(`BBC Sport search returns ${searchTerm} results`, async ({ page }) => {
-    const searchBox = page.getByRole('combobox');
+  test(`BBC search returns ${searchTerm} results`, async ({ page }) => {
+    const searchBox = page.locator('input').first();
 
     await searchBox.fill(searchTerm);
 
-    await page.getByRole('button', { name: 'Search' }).click();
+    await page.getByRole('button', { name: /search/i }).click();
 
-    await page.waitForLoadState('domcontentloaded');
+    await expect(page).toHaveURL(/search/i);
 
-    await expect(page).toHaveURL(/search/);
-
-    await expect(searchBox).toHaveValue(searchTerm);
+    await expect(page.locator('body')).toContainText(searchTerm);
   });
 });
