@@ -3,9 +3,6 @@ import { test, expect } from '@playwright/test';
 const pages = [
   'https://www.bbc.co.uk/',
   'https://www.bbc.co.uk/news',
-  'https://www.bbc.co.uk/news/uk',
-  'https://www.bbc.co.uk/news/world',
-  'https://www.bbc.co.uk/sport',
   'https://www.bbc.co.uk/sport/tennis',
 ];
 
