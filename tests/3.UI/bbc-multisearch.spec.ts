@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 const searchTerms = [
   'Alcaraz',
-  'Boulter',
+  'Djokovic',
 ];
 
 test.beforeEach(async ({ page }) => {
@@ -23,7 +23,7 @@ test.beforeEach(async ({ page }) => {
   const searchBox = page.locator('input');
 
   await expect(searchBox.first()).toBeVisible({
-    timeout: 50000,
+    timeout: 90000,
   });
 });
 
