@@ -16,6 +16,9 @@ test.describe('GET Post Validation', () => {
 
     body = await response.json();
 
+    console.log(response.status());
+    console.log(body);
+
   });
 
   test('Post has an ID', async () => {
@@ -174,5 +177,114 @@ test.describe('DELETE Validation', () => {
   test('Delete response contains content-type header', async () => {
     expect(response.headers()).toHaveProperty('content-type');
   });
+
+});
+
+test.describe('GET Negative Validation', () => {
+
+  test('Invalid post ID returns empty object', async ({
+    request,
+  }) => {
+
+    const response = await request.get(
+      `${BASE_URL}/posts/999999`
+    );
+
+    const body = await response.json();
+
+    expect(Object.keys(body).length).toBe(0);
+
+  });
+
+});
+
+test('Invalid post has no title property', async ({ request }) => {
+
+  const response = await request.get(
+    `${BASE_URL}/posts/999999`
+  );
+
+  const body = await response.json();
+
+  expect(body.title).toBeUndefined();
+
+});
+
+test('Invalid post has no user ID', async ({ request }) => {
+
+  const response = await request.get(
+    `${BASE_URL}/posts/999999`
+  );
+
+  const body = await response.json();
+
+  expect(body.userId).toBeUndefined();
+
+});
+
+test('Invalid post response is an object', async ({ request }) => {
+
+  const response = await request.get(
+    `${BASE_URL}/posts/999999`
+  );
+
+  const body = await response.json();
+
+  expect(typeof body).toBe('object');
+
+});
+
+test('Invalid endpoint returns 404', async ({ request }) => {
+
+  const response = await request.get(
+    `${BASE_URL}/not-a-real-endpoint`
+  );
+
+  expect(response.status()).toBe(404);
+
+});
+
+test('String ID returns empty response', async ({ request }) => {
+
+  const response = await request.get(
+    `${BASE_URL}/posts/abc`
+  );
+
+  const body = await response.json();
+
+  expect(Object.keys(body).length).toBe(0);
+
+});
+
+
+test('POST with missing fields', async ({ request }) => {
+
+  const response = await request.post(
+    `${BASE_URL}/posts`,
+    {
+      data: {}
+    }
+  );
+
+  const body = await response.json();
+
+  expect(body).toHaveProperty('id');
+
+});
+
+test('POST with invalid userId type', async ({ request }) => {
+
+  const response = await request.post(
+    `${BASE_URL}/posts`,
+    {
+      data: {
+        title: 'Test',
+        body: 'Test',
+        userId: 'invalid'
+      }
+    }
+  );
+
+  expect(response.ok()).toBeTruthy();
 
 });
