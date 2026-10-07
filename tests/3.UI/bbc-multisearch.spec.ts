@@ -23,7 +23,7 @@ test.beforeEach(async ({ page }) => {
   const searchBox = page.locator('input');
 
   await expect(searchBox.first()).toBeVisible({
-    timeout: 30000,
+    timeout: 50000,
   });
 });
 

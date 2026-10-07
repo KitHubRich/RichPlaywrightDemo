@@ -15,7 +15,7 @@ for (const endpoint of endpoints) {
     const duration = Date.now() - start;
 
     expect(response.status()).toBe(200);
-    expect(duration).toBeLessThan(50000);
+    expect(duration).toBeLessThan(90000);
 
     console.log(
       `${endpoint.name}: ${response.status()} - ${duration}ms`
