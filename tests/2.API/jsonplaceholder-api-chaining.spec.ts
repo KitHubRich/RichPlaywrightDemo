@@ -2,12 +2,16 @@ import { test, expect } from '@playwright/test';
 
 const BASE_URL = 'https://jsonplaceholder.typicode.com';
 
-test('Get post then retrieve its user', async ({
-  request,
-}) => {
+const postIds = [1, 25, 50, 75, 100];
+
+for (const postId of postIds) {
+
+  test(`Chain post ${postId} to user and todos`, async ({
+    request,
+  }) => {
 
   const postResponse = await request.get(
-    `${BASE_URL}/posts/1`
+    `${BASE_URL}/posts/${postId}`
   );
 
   expect (postResponse.status()).toBe (200);
@@ -53,6 +57,43 @@ for (const todo of todosBody) {
 
   expect(todo.userId).toBe(userId);
 
+  expect(todo.id).toBeGreaterThan(0);
+
+  expect(todo.title.length)
+    .toBeGreaterThan(0);
+
+  expect(typeof todo.completed)
+    .toBe('boolean');
+
 }
 
+const todoId = todosBody[0].id;
+
+const specificTodoResponse = await request.get(
+  `${BASE_URL}/todos/${todoId}`
+);
+
+expect(specificTodoResponse.status()).toBe(200);
+
+const specificTodoBody =
+  await specificTodoResponse.json();
+
+  expect(specificTodoBody.id).toBe(todoId);
+
+expect(specificTodoBody.userId).toBe(userId);
+
+expect(specificTodoBody.title.length)
+  .toBeGreaterThan(0);
+
+expect(typeof specificTodoBody.completed)
+  .toBe('boolean');
+
+  console.log(`User ID: ${userId}`);
+console.log(`Todo ID: ${todoId}`);
+console.log(
+  `Todo Title: ${specificTodoBody.title}`
+);
+
 });
+
+}
