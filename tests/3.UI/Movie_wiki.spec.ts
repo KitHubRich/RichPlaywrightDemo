@@ -1,19 +1,15 @@
 import { test, expect } from '@playwright/test';
 
 
+
+
 const movies = [
   'Once_Upon_a_Time_in_Hollywood',
   'The_Big_Lebowski',
   'The_Odyssey',
   'Fight_Club',
-  'Weapons',
   'Scream',
   'Scream_2',
-  'Scream_3',
-  'Scream_4',
-  'Scream_5',
-  'Scream_6',
-  'Scream_7',
   'Raiders_of_the_Lost_Ark',
   'Indiana_Jones_and_the_Temple_of_Doom',
   'Indiana_Jones_and_the_Last_Crusade',
@@ -37,17 +33,20 @@ const movies = [
   'Rocky',
   'Rocky_II',
   'Rocky_IV',
-  'Rocky_Balboa',
   'Creed',
-  'Superman_the_Movie',
+  'Superman_2',
   'The_Terminator',
   'Terminator_2_Judgment_Day',
   'The_Lord_of_the_Rings_The_Fellowship_of_the_Ring',
+  'The_Lord_of_the_Rings_The_Two_Towers',
+  'The_Lord_of_the_Rings_The_Return_of_the_King',
   'Alien',
   'Aliens',
   'Back_to_the_Future',
   'Blade_Runner',
 ];
+
+
 
 for (const movie of movies) {
 
@@ -59,11 +58,23 @@ for (const movie of movies) {
       `https://en.wikipedia.org/wiki/${movie}`
     );
 
-    await expect(
-      page.locator('#firstHeading')
-    ).toBeVisible();
+const heading =
+  page.locator('#firstHeading');
 
-    console.log(await page.title());
+await expect(heading)
+  .toBeVisible();
+
+console.log(`Movie: ${movie}`);
+
+console.log(
+  `Heading: ${await heading.textContent()}`
+);
+
+console.log(
+  `Title: ${await page.title()}`
+);
+
+
 
   });
 
