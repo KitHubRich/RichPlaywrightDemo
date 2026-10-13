@@ -69,6 +69,44 @@ for (const todo of todosBody) {
 
 const todoId = todosBody[0].id;
 
+const commentsResponse = await request.get(
+  `${BASE_URL}/posts/${postId}/comments`
+);
+
+expect(commentsResponse.status())
+  .toBe(200);
+
+const commentsBody =
+  await commentsResponse.json();
+
+expect(Array.isArray(commentsBody))
+  .toBe(true);
+
+expect(commentsBody.length)
+  .toBeGreaterThan(0);
+
+for (const comment of commentsBody) {
+
+  expect(comment).toHaveProperty('postId');
+  expect(comment).toHaveProperty('id');
+  expect(comment).toHaveProperty('name');
+  expect(comment).toHaveProperty('email');
+  expect(comment).toHaveProperty('body');
+
+  expect(comment.postId).toBe(postId);
+
+  expect(comment.email).toContain('@');
+
+  expect(comment.body.length)
+    .toBeGreaterThan(0);
+
+    console.log(
+  `Comment count: ${commentsBody.length}`
+);
+
+
+}
+
 const specificTodoResponse = await request.get(
   `${BASE_URL}/todos/${todoId}`
 );
