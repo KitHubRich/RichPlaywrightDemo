@@ -4,134 +4,200 @@ const BASE_URL = 'https://jsonplaceholder.typicode.com';
 
 const postIds = [1, 25, 50, 75, 100];
 
-for (const postId of postIds) {
+async function getJson(
+  request: any,
+  endpoint: string
+) {
+  const response = await request.get(
+    `${BASE_URL}${endpoint}`
+  );
 
+  expect(response.status()).toBe(200);
+
+  return response.json();
+}
+
+async function getUser(
+  request: any,
+  userId: number
+) {
+  return getJson(
+    request,
+    `/users/${userId}`
+  );
+}
+
+async function getTodos(
+  request: any,
+  userId: number
+) {
+  return getJson(
+    request,
+    `/users/${userId}/todos`
+  );
+}
+
+async function getPost(
+  request: any,
+  postId: number
+) {
+  return getJson(
+    request,
+    `/posts/${postId}`
+  );
+}
+
+async function getComments(
+  request: any,
+  postId: number
+) {
+  return getJson(
+    request,
+    `/posts/${postId}/comments`
+  );
+}
+
+for (const postId of postIds) {
   test(`Chain post ${postId} to user and todos`, async ({
     request,
   }) => {
 
-  const postResponse = await request.get(
-    `${BASE_URL}/posts/${postId}`
-  );
+const postBody =
+  await getPost(request, postId);
 
-  expect (postResponse.status()).toBe (200);
+    const userId = postBody.userId;
 
+    const userBody = await getUser(
+      request,
+      userId
+    );
 
-  const postBody = await postResponse.json();
+    expect(userBody.id).toBe(userId);
+    expect(userBody.name.length)
+      .toBeGreaterThan(0);
 
-  const userId = postBody.userId;
+    expect(userBody.email)
+      .toContain('@');
 
-  const userResponse = await request.get(
-    `${BASE_URL}/users/${userId}`
-  );
+    const todosBody = await getTodos(
+      request,
+      userId
+    );
 
-  const userBody = await userResponse.json();
+    console.log(`Todo count: ${todosBody.length}`);
 
-  expect(userResponse.status()).toBe(200);
+    expect(Array.isArray(todosBody))
+      .toBe(true);
 
-  expect(userBody.id).toBe(userId);
-  expect(userBody.name.length).toBeGreaterThan(0);
-  expect(userBody.email).toContain('@');
+    expect(todosBody.length)
+      .toBeGreaterThan(0);
 
-  const todosResponse = await request.get(
-  `${BASE_URL}/users/${userId}/todos`
-);
+    expect(todosBody[0])
+      .toHaveProperty('userId');
 
-expect(todosResponse.status()).toBe(200);
+    expect(todosBody[0])
+      .toHaveProperty('id');
 
-const todosBody = await todosResponse.json();
+    expect(todosBody[0])
+      .toHaveProperty('title');
 
-console.log(`Todo count: ${todosBody.length}`);
+    expect(todosBody[0])
+      .toHaveProperty('completed');
 
-expect(Array.isArray(todosBody)).toBe(true);
+    for (const todo of todosBody) {
 
-expect(todosBody.length).toBeGreaterThan(0);
-expect(todosBody[0]).toHaveProperty('userId');
-expect(todosBody[0]).toHaveProperty('id');
-expect(todosBody[0]).toHaveProperty('title');
-expect(todosBody[0]).toHaveProperty('completed');
+      expect(todo.userId)
+        .toBe(userId);
 
-expect(todosBody[0].userId).toBe(userId);
+      expect(todo.id)
+        .toBeGreaterThan(0);
 
-for (const todo of todosBody) {
+      expect(todo.title.length)
+        .toBeGreaterThan(0);
 
-  expect(todo.userId).toBe(userId);
+      expect(typeof todo.completed)
+        .toBe('boolean');
 
-  expect(todo.id).toBeGreaterThan(0);
+    }
 
-  expect(todo.title.length)
-    .toBeGreaterThan(0);
+    const todoId = todosBody[0].id;
 
-  expect(typeof todo.completed)
-    .toBe('boolean');
+    const specificTodoResponse =
+      await request.get(
+        `${BASE_URL}/todos/${todoId}`
+      );
 
-}
+    expect(
+      specificTodoResponse.status()
+    ).toBe(200);
 
-const todoId = todosBody[0].id;
+    const specificTodoBody =
+      await specificTodoResponse.json();
 
-const commentsResponse = await request.get(
-  `${BASE_URL}/posts/${postId}/comments`
-);
+    expect(specificTodoBody.id)
+      .toBe(todoId);
 
-expect(commentsResponse.status())
-  .toBe(200);
+    expect(specificTodoBody.userId)
+      .toBe(userId);
+
+    expect(
+      specificTodoBody.title.length
+    ).toBeGreaterThan(0);
+
+    expect(
+      typeof specificTodoBody.completed
+    ).toBe('boolean');
 
 const commentsBody =
-  await commentsResponse.json();
+  await getComments(
+    request,
+    postId
+  );
 
-expect(Array.isArray(commentsBody))
-  .toBe(true);
+    expect(Array.isArray(commentsBody))
+      .toBe(true);
 
-expect(commentsBody.length)
-  .toBeGreaterThan(0);
-
-for (const comment of commentsBody) {
-
-  expect(comment).toHaveProperty('postId');
-  expect(comment).toHaveProperty('id');
-  expect(comment).toHaveProperty('name');
-  expect(comment).toHaveProperty('email');
-  expect(comment).toHaveProperty('body');
-
-  expect(comment.postId).toBe(postId);
-
-  expect(comment.email).toContain('@');
-
-  expect(comment.body.length)
-    .toBeGreaterThan(0);
+    expect(commentsBody.length)
+      .toBeGreaterThan(0);
 
     console.log(
-  `Comment count: ${commentsBody.length}`
-);
+      `Comment count: ${commentsBody.length}`
+    );
 
+    for (const comment of commentsBody) {
 
-}
+      expect(comment)
+        .toHaveProperty('postId');
 
-const specificTodoResponse = await request.get(
-  `${BASE_URL}/todos/${todoId}`
-);
+      expect(comment)
+        .toHaveProperty('id');
 
-expect(specificTodoResponse.status()).toBe(200);
+      expect(comment)
+        .toHaveProperty('name');
 
-const specificTodoBody =
-  await specificTodoResponse.json();
+      expect(comment)
+        .toHaveProperty('email');
 
-  expect(specificTodoBody.id).toBe(todoId);
+      expect(comment)
+        .toHaveProperty('body');
 
-expect(specificTodoBody.userId).toBe(userId);
+      expect(comment.postId)
+        .toBe(postId);
 
-expect(specificTodoBody.title.length)
-  .toBeGreaterThan(0);
+      expect(comment.email)
+        .toContain('@');
 
-expect(typeof specificTodoBody.completed)
-  .toBe('boolean');
+      expect(comment.body.length)
+        .toBeGreaterThan(0);
 
-  console.log(`User ID: ${userId}`);
-console.log(`Todo ID: ${todoId}`);
-console.log(
-  `Todo Title: ${specificTodoBody.title}`
-);
+    }
 
-});
+    console.log(`User ID: ${userId}`);
+    console.log(`Todo ID: ${todoId}`);
 
+    console.log(
+      `Todo Title: ${specificTodoBody.title}`
+    );
+
+  });
 }
