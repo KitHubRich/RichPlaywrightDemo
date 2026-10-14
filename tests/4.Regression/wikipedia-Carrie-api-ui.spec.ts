@@ -1,16 +1,14 @@
 import { test, expect } from '@playwright/test';
+import { getWikiSummary } from '../../utils/api-helpers';
 
 test('Wikipedia API title matches UI title', async ({
   page,
   request,
 }) => {
-  const response = await request.get(
-    'https://en.wikipedia.org/api/rest_v1/page/summary/Carrie'
-  );
-
-  expect(response.ok()).toBeTruthy();
-
-  const body = await response.json();
+const body = await getWikiSummary(
+  request,
+  'Carrie'
+);
 
   await page.goto(
     body.content_urls.desktop.page
@@ -27,7 +25,6 @@ test('Wikipedia API title matches UI title', async ({
   console.log('API Title:', body.title);
   console.log('UI Title:', uiTitle);
   console.log('Extract:', body.extract);
-  console.log(body.extract);
 
 await expect(heading)
   .toBeVisible();
