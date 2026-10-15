@@ -5,55 +5,60 @@ import {
   getWikiArticles
 } from '../../services/wiki-service';
 
-const articles = getWikiArticles();
+test.describe('Wikipedia API UI Validation', () => {
 
-for (const article of articles) {
-  test(`${article} API matches UI`, async ({
-    page,
-    request,
-  }) => {
-    const body = await getWikiSummary(
+  const articles = getWikiArticles();
+
+  for (const article of articles) {
+
+    test(`${article} API matches UI`, async ({
+      page,
       request,
-      article
-    );
+    }) => {
 
-    await page.goto(
-      body.content_urls.desktop.page
-    );
+      const body = await getWikiSummary(
+        request,
+        article
+      );
 
-    await expect(page)
-  .toHaveURL(
-    body.content_urls.desktop.page
-  );
+      await page.goto(
+        body.content_urls.desktop.page
+      );
 
-    const heading =
-      page.locator('#firstHeading');
+      await expect(page)
+        .toHaveURL(
+          body.content_urls.desktop.page
+        );
 
-    const uiTitle =
-      await heading.textContent();
+      const heading =
+        page.locator('#firstHeading');
 
-    console.log('Article:', article);
-    console.log('Description:', body.description);
-    console.log('API Title:', body.title);
-    console.log('UI Title:', uiTitle);
+      const uiTitle =
+        await heading.textContent();
 
-    await expect(heading)
-      .toBeVisible();
+      console.log('Article:', article);
+      console.log('Description:', body.description);
+      console.log('API Title:', body.title);
+      console.log('UI Title:', uiTitle);
 
-    await expect(heading)
-      .toHaveText(body.title);
+      await expect(heading)
+        .toBeVisible();
 
-    console.log(
-      'Checking description:',
-      body.description
-    );
+      await expect(heading)
+        .toHaveText(body.title);
 
-    await expect(
-      page.locator('#mw-content-text')
-    ).toContainText(
-      body.description
-    );
+      console.log(
+        'Checking description:',
+        body.description
+      );
 
-    console.log('Description found!');
-  });
-}
+      await expect(
+        page.locator('#mw-content-text')
+      ).toContainText(
+        body.description
+      );
+
+      console.log('Description found!');
+    });
+  }
+});
