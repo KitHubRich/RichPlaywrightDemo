@@ -1,13 +1,11 @@
 import { test, expect } from '@playwright/test';
-import { getWikiSummary } from '../../utils/api-helpers';
 
-const articles = [
-  'Carlos_Alcaraz',
-  'Roger_Federer',
-  'Chepstow',
-  'Carrie',
-  'Crystal_lake',
-];
+import {
+  getWikiSummary,
+  getWikiArticles
+} from '../../services/wiki-service';
+
+const articles = getWikiArticles();
 
 for (const article of articles) {
   test(`${article} API matches UI`, async ({
@@ -22,6 +20,11 @@ for (const article of articles) {
     await page.goto(
       body.content_urls.desktop.page
     );
+
+    await expect(page)
+  .toHaveURL(
+    body.content_urls.desktop.page
+  );
 
     const heading =
       page.locator('#firstHeading');

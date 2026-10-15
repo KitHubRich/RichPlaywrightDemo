@@ -15,3 +15,13 @@ export async function getWikiSummary(
 
   return response.json();
 }
+
+export function getWikiArticles() {
+  return [
+    'Carlos_Alcaraz',
+    'Roger_Federer',
+    'Chepstow',
+    'Carrie',
+    'Crystal_lake',
+  ];
+}

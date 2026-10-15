@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { getWikiSummary } from '../../utils/api-helpers';
+import { getWikiSummary } from '../../services/wiki-service';
 
 test('Wikipedia API title matches UI title', async ({
   page,
