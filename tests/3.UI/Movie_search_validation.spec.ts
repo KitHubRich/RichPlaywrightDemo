@@ -1,10 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 const movies = [
-  'Once Upon a Time in Hollywood',
-  'Scream 2',
   'True Romance',
-  'Anora',
   'One Battle After Another',
   'The Love Witch',
   'Point Break',

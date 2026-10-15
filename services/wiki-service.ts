@@ -16,25 +16,60 @@ export async function getWikiSummary(
   return response.json();
 }
 
+export function getTennisPlayers() {
+  return [
+    'Carlos_Alcaraz',
+    'Rafael_Nadal',
+    'Roger_Federer',
+    'Emma_Raducanu',
+  ];
+}
+
+export function getPlaces() {
+  return [
+    'Chepstow',
+    'Japan',
+    'Tenby',
+  ];
+}
+
+export function getDirectors() {
+  return [
+  'Quentin_Tarantino',
+  'Ridley_Scott',
+  'Steven_Spielberg',
+  'Zach_Cregger',
+  ];
+}
+
+export function getActors() {
+  return [
+    'Brad_Pitt',
+    'Margaret_Qualley',
+    'Margot_Robbie',
+    'Keanu_Reeves',
+  ];
+}
+
+export function getMovies() {
+  return [
+    'Fight_Club',
+    'Once_Upon_a_Time_in_Hollywood',
+    'Pulp_Fiction',
+    'Raiders_of_the_Lost_Ark',
+    'The_Big_Lebowski',
+    'The_Bourne_Ultimatum',
+    'The_Terminator',
+    'True_Romance',
+  ];
+}
+
 export function getWikiArticles() {
-return [
-// Articles used by parameterised Wikipedia API/UI validation tests export function getWikiArticles() {
-  'Anora', 
-  'Carlos_Alcaraz',
-  'Carrie',
-  'Chepstow',
-  'Crystal_Lake',
-  'Fight_Club',
-  'Indiana_Jones_and_the_Last_Crusade',
-  'Indiana_Jones_and_the_Temple_of_Doom',
-  'Once_Upon_a_Time_in_Hollywood',
-  'Pulp_Fiction',
-  'Rafael_Nadal',
-  'Raiders_of_the_Lost_Ark',
-  'Roger_Federer',
-  'Tenby',
-  'The_Big_Lebowski',
-  'The_Bourne_Ultimatum',
-  'True_Romance',
-];
+  return [
+    ...getTennisPlayers(),
+    ...getPlaces(),
+    ...getActors(),
+    ...getMovies(),
+    ...getDirectors(),
+  ];
 }
