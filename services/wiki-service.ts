@@ -20,7 +20,6 @@ export function getTennisPlayers() {
   return [
     'Carlos_Alcaraz',
     'Rafael_Nadal',
-    'Roger_Federer',
     'Emma_Raducanu',
   ];
 }
@@ -28,7 +27,6 @@ export function getTennisPlayers() {
 export function getPlaces() {
   return [
     'Chepstow',
-    'Japan',
     'Tenby',
   ];
 }
@@ -36,7 +34,6 @@ export function getPlaces() {
 export function getDirectors() {
   return [
   'Quentin_Tarantino',
-  'Ridley_Scott',
   'Steven_Spielberg',
   'Zach_Cregger',
   ];
@@ -46,7 +43,6 @@ export function getActors() {
   return [
     'Brad_Pitt',
     'Margaret_Qualley',
-    'Margot_Robbie',
     'Keanu_Reeves',
   ];
 }
@@ -54,13 +50,10 @@ export function getActors() {
 export function getMovies() {
   return [
     'Fight_Club',
-    'Once_Upon_a_Time_in_Hollywood',
     'Pulp_Fiction',
     'Raiders_of_the_Lost_Ark',
-    'The_Big_Lebowski',
     'The_Bourne_Ultimatum',
     'The_Terminator',
-    'True_Romance',
   ];
 }
 
