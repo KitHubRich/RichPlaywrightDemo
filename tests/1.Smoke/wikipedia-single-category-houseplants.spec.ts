@@ -4,25 +4,25 @@ import {
   getArticlesByCategory,
 } from '../../services/wiki-service';
 
-const actors =
-  getArticlesByCategory('actors');
+const houseplants =
+  getArticlesByCategory('houseplants');
 
-test.describe('Actor Regression', () => {
+test.describe('Houseplant Regression', () => {
 
-  for (const actor of actors) {
+  for (const plant of houseplants) {
 
-    test(`${actor} loads successfully`,
+    test(`${plant} loads successfully`,
       async ({ page }) => {
 
         await page.goto(
-          `https://en.wikipedia.org/wiki/${actor}`
+          `https://en.wikipedia.org/wiki/${plant}`
         );
 
         await expect(
           page.locator('#firstHeading')
         ).toBeVisible();
 
-        console.log(`Actor: ${actor}`);
+        console.log(`Houseplant: ${plant}`);
         console.log(
           `Heading: ${
             await page.locator('#firstHeading').textContent()

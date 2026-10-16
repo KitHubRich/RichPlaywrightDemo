@@ -13,7 +13,6 @@ export async function getWikiSummary(
   let response = await request.get(url);
 
   if (response.status() === 429) {
-
     console.log(
       `Rate limited for ${article}. Waiting 5 seconds...`
     );
@@ -71,7 +70,20 @@ export function getMovies() {
   ];
 }
 
+export function getAuthors() {
+  return [
+    'Philip_Pullman',
+    'Joseph_Heller',
+    'Stieg_Larsson',
+  ];
+}
 
+export function getHouseplants() {
+  return [
+    'Aloe_vera',
+    'Spider_Plant',
+  ];
+}
 
 export const wikiCategories = {
   tennisPlayers: getTennisPlayers(),
@@ -79,6 +91,8 @@ export const wikiCategories = {
   actors: getActors(),
   movies: getMovies(),
   directors: getDirectors(),
+  authors: getAuthors(),
+  houseplants: [getHouseplants()],
 };
 
 export function getArticlesByCategory(
@@ -87,11 +101,6 @@ export function getArticlesByCategory(
   return wikiCategories[category];
 }
 
-export function getWikiArticles() {
-  return Object.values(wikiCategories).flat();
-}
-``
-
 export function getRandomArticle(
   category: keyof typeof wikiCategories
 ) {
@@ -99,5 +108,17 @@ export function getRandomArticle(
 
   return articles[
     Math.floor(Math.random() * articles.length)
+  ];
+}
+
+export function getWikiArticles() {
+  return [
+    ...getTennisPlayers(),
+    ...getPlaces(),
+    ...getActors(),
+    ...getMovies(),
+    ...getDirectors(),
+    ...getAuthors(),
+    ...getHouseplants(),
   ];
 }
