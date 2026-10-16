@@ -10,23 +10,35 @@ export async function getWikiSummary(
   const url =
     `https://en.wikipedia.org/api/rest_v1/page/summary/${article}`;
 
-  let response = await request.get(url);
+  let response;
 
-  if (response.status() === 429) {
-    console.log(
-      `Rate limited for ${article}. Waiting 5 seconds...`
-    );
-
-    await new Promise(resolve =>
-      setTimeout(resolve, 5000)
-    );
+  for (let attempt = 1; attempt <= 3; attempt++) {
 
     response = await request.get(url);
+
+    if (response.ok()) {
+      return response.json();
+    }
+
+    if (response.status() === 429) {
+
+      console.log(
+        `Attempt ${attempt}: Rate limited for ${article}`
+      );
+
+      await new Promise(resolve =>
+        setTimeout(resolve, 10000)
+      );
+
+      continue;
+    }
+
+    break;
   }
 
-  await expect(response).toBeOK();
+  await expect(response!).toBeOK();
 
-  return response.json();
+  return response!.json();
 }
 
 export function getTennisPlayers() {
@@ -92,7 +104,7 @@ export const wikiCategories = {
   movies: getMovies(),
   directors: getDirectors(),
   authors: getAuthors(),
-  houseplants: [getHouseplants()],
+  houseplants: getHouseplants(),
 };
 
 export function getArticlesByCategory(
