@@ -12,6 +12,9 @@ A Playwright automation project created for learning and demonstrating browser a
  
 - BBC homepage title verification
 - BBC navigation tests
+- Wikipedia search categories
+- API Tests
+- API and UI Hybrid tests
  
 ## Running Tests
  
