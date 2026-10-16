@@ -7,9 +7,23 @@ export async function getWikiSummary(
   request: APIRequestContext,
   article: string
 ) {
-  const response = await request.get(
-    `https://en.wikipedia.org/api/rest_v1/page/summary/${article}`
-  );
+  const url =
+    `https://en.wikipedia.org/api/rest_v1/page/summary/${article}`;
+
+  let response = await request.get(url);
+
+  if (response.status() === 429) {
+
+    console.log(
+      `Rate limited for ${article}. Waiting 5 seconds...`
+    );
+
+    await new Promise(resolve =>
+      setTimeout(resolve, 5000)
+    );
+
+    response = await request.get(url);
+  }
 
   await expect(response).toBeOK();
 
