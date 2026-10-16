@@ -33,9 +33,9 @@ export function getPlaces() {
 
 export function getDirectors() {
   return [
-  'Quentin_Tarantino',
-  'Steven_Spielberg',
-  'Zach_Cregger',
+    'Quentin_Tarantino',
+    'Steven_Spielberg',
+    'Zach_Cregger',
   ];
 }
 
@@ -57,12 +57,33 @@ export function getMovies() {
   ];
 }
 
+
+
+export const wikiCategories = {
+  tennisPlayers: getTennisPlayers(),
+  places: getPlaces(),
+  actors: getActors(),
+  movies: getMovies(),
+  directors: getDirectors(),
+};
+
+export function getArticlesByCategory(
+  category: keyof typeof wikiCategories
+) {
+  return wikiCategories[category];
+}
+
 export function getWikiArticles() {
-  return [
-    ...getTennisPlayers(),
-    ...getPlaces(),
-    ...getActors(),
-    ...getMovies(),
-    ...getDirectors(),
+  return Object.values(wikiCategories).flat();
+}
+``
+
+export function getRandomArticle(
+  category: keyof typeof wikiCategories
+) {
+  const articles = wikiCategories[category];
+
+  return articles[
+    Math.floor(Math.random() * articles.length)
   ];
 }
