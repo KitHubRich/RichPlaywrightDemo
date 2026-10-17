@@ -1,9 +1,11 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 
 import {
   getWikiSummary,
   getWikiArticles
 } from '../../services/wiki-service';
+
+import { WikiPage } from '../../pages/wiki-page';
 
 test.describe('Wikipedia API UI Validation', () => {
 
@@ -16,45 +18,41 @@ test.describe('Wikipedia API UI Validation', () => {
       request,
     }) => {
 
+      const wikiPage = new WikiPage(page);
+
       const body = await getWikiSummary(
         request,
         article
       );
 
-      await page.goto(
+      await wikiPage.gotoUrl(
         body.content_urls.desktop.page
       );
 
-      await expect(page)
-        .toHaveURL(
-          body.content_urls.desktop.page
-        );
-
-      const heading =
-        page.locator('#firstHeading');
+      await wikiPage.expectUrl(
+        body.content_urls.desktop.page
+      );
 
       const uiTitle =
-        await heading.textContent();
+        await wikiPage.getHeadingText();
 
       console.log('Article:', article);
       console.log('Description:', body.description);
       console.log('API Title:', body.title);
       console.log('UI Title:', uiTitle);
 
-      await expect(heading)
-        .toBeVisible();
+      await wikiPage.expectHeadingVisible();
 
-      await expect(heading)
-        .toHaveText(body.title);
+      await wikiPage.expectHeadingText(
+        body.title
+      );
 
       console.log(
         'Checking description:',
         body.description
       );
 
-      await expect(
-        page.locator('#mw-content-text')
-      ).toContainText(
+      await wikiPage.expectPageContains(
         body.description
       );
 

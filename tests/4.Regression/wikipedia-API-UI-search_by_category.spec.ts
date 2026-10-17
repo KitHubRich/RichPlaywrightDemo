@@ -1,5 +1,6 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { getArticlesByCategory } from '../../services/wiki-service';
+import { WikiPage } from '../../pages/wiki-page';
 
 test('Wikipedia category articles load successfully', async ({ page }) => {
   const category = 'movies';
@@ -8,14 +9,11 @@ test('Wikipedia category articles load successfully', async ({ page }) => {
 
   console.log(`Testing category: ${category}`);
 
-  for (const article of articles) {
-    await page.goto(
-      `https://en.wikipedia.org/wiki/${article}`
-    );
+  const wikiPage = new WikiPage(page);
 
-    await expect(
-      page.locator('#firstHeading')
-    ).toBeVisible();
+  for (const article of articles) {
+    await wikiPage.gotoArticle(article);
+    await wikiPage.expectHeadingVisible();
 
     console.log(`Checked ${article}`);
   }
