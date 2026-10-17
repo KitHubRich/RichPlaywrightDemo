@@ -93,7 +93,7 @@ export function getAuthors() {
 export function getHouseplants() {
   return [
     'Aloe_vera',
-    'Spider_Plant',
+    'Lavandula',
   ];
 }
 
