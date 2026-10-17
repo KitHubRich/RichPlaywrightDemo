@@ -1,4 +1,10 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
+
+import { WikipediaHomePage }
+  from '../../pages/wikipedia-home-page';
+
+import { WikipediaArticlePage }
+  from '../../pages/wikipedia-article-page';
 
 const movies = [
   'True Romance',
@@ -9,30 +15,27 @@ const movies = [
 ];
 
 for (const movie of movies) {
-  test(`Search for ${movie}`, async ({ page }) => {
-    await page.goto(
-      'https://en.wikipedia.org/wiki/Main_Page'
-    );
 
-    await page
-      .getByRole('searchbox', {
-        name: 'Search Wikipedia',
-      })
-      .fill(movie);
+  test(`Search for ${movie}`, async ({
+    page,
+  }) => {
 
-    await page.keyboard.press('Enter');
+    const homePage =
+      new WikipediaHomePage(page);
 
-    const heading =
-      page.locator('#firstHeading');
+    const articlePage =
+      new WikipediaArticlePage(page);
 
-    await expect(heading)
-      .toBeVisible();
+    await homePage.goto();
+
+    await homePage.searchFor(movie);
+
+    await articlePage.expectHeading(movie);
 
     const headingText =
-      await heading.textContent();
+      await articlePage.getHeadingText();
 
     console.log(`Movie: ${movie}`);
     console.log(`Heading: ${headingText}`);
-    console.log(`Title: ${await page.title()}`);
   });
 }
