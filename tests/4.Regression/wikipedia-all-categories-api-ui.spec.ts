@@ -1,11 +1,9 @@
-import { test } from '@playwright/test';
+import { test } from '../../fixtures/wiki-fixtures';
 
 import {
   getWikiSummary,
   getWikiArticles
 } from '../../services/wiki-service';
-
-import { WikiPage } from '../../pages/wiki-page';
 
 test.describe('Wikipedia API UI Validation', () => {
 
@@ -14,11 +12,9 @@ test.describe('Wikipedia API UI Validation', () => {
   for (const article of articles) {
 
     test(`${article} API matches UI`, async ({
-      page,
+      wikiPage,
       request,
     }) => {
-
-      const wikiPage = new WikiPage(page);
 
       const body = await getWikiSummary(
         request,

@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '../../fixtures/wiki-fixtures';
 
 import {
   getArticlesByCategory,
@@ -26,15 +26,11 @@ test.describe('Wikipedia Category Regression', () => {
 
         test(
           `${article} loads successfully`,
-          async ({ page }) => {
+          async ({ wikiPage }) => {
 
-            await page.goto(
-              `https://en.wikipedia.org/wiki/${article}`
-            );
+            await wikiPage.gotoArticle(article);
 
-            await expect(
-              page.locator('#firstHeading')
-            ).toBeVisible();
+            await wikiPage.expectHeadingVisible();
 
             console.log(
               `Category: ${category}`
@@ -45,9 +41,7 @@ test.describe('Wikipedia Category Regression', () => {
             );
 
             const heading =
-              await page
-                .locator('#firstHeading')
-                .textContent();
+              await wikiPage.getHeadingText();
 
             console.log(
               `Heading: ${heading}`
