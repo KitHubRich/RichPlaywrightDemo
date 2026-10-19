@@ -7,11 +7,11 @@ import {
 const houseplants =
   getArticlesByCategory('houseplants');
 
-test.describe('Houseplant Regression', () => {
+test.describe('@smoke Houseplants', () => {
 
   for (const plant of houseplants) {
 
-    test(`${plant} loads successfully`,
+  test(`@smoke ${plant} loads successfully`,
       async ({ page }) => {
 
         await page.goto(

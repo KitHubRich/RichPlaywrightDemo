@@ -1,9 +1,11 @@
 import { test, expect } from '@playwright/test';
 
-test('Get user via API then display in browser', async ({
-  page,
-  request,
-}) => {
+test(
+  '@api @ui @hybrid Get user via API then display in browser',
+  async ({
+    page,
+    request,
+  }) => {
 
   const response = await request.get(
     'https://jsonplaceholder.typicode.com/users/1'

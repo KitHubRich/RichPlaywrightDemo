@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('BBC homepage responds and loads', async ({
+test('@regression @api @ui @hybrid @bbc BBC homepage responds and loads', async ({
   page,
   request,
 }) => {

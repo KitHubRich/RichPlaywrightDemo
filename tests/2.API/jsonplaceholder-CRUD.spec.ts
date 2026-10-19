@@ -2,7 +2,9 @@ import { test, expect } from '@playwright/test';
 
 const BASE_URL = 'https://jsonplaceholder.typicode.com';
 
-test('GET post returns correct data', async ({ request }) => {
+test('@api @crud GET post returns correct data', async ({
+  request,
+}) => {
   const response = await request.get(
     `${BASE_URL}/posts/1`
   );
@@ -15,7 +17,9 @@ test('GET post returns correct data', async ({ request }) => {
   expect(body.userId).toBe(1);
 });
 
-test('POST creates a new post', async ({ request }) => {
+test('@api @crud POST creates a new post', async ({
+  request,
+}) => {
   const response = await request.post(
     `${BASE_URL}/posts`,
     {
@@ -35,7 +39,9 @@ test('POST creates a new post', async ({ request }) => {
   expect(body.userId).toBe(99);
 });
 
-test('PUT updates an existing post', async ({ request }) => {
+test('@api @crud PUT updates an existing post', async ({
+  request,
+}) => {
   const response = await request.put(
     `${BASE_URL}/posts/1`,
     {
@@ -55,7 +61,9 @@ test('PUT updates an existing post', async ({ request }) => {
   expect(body.title).toBe('Updated Title');
 });
 
-test('DELETE removes a post', async ({ request }) => {
+test('@api @crud DELETE removes a post', async ({
+  request,
+}) => {
   const response = await request.delete(
     `${BASE_URL}/posts/1`
   );

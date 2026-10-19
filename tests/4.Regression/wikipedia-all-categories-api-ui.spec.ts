@@ -11,7 +11,7 @@ test.describe('Wikipedia API UI Validation', () => {
 
   for (const article of articles) {
 
-    test(`${article} API matches UI`, async ({
+    test(`@hybrid @regression ${article} API matches UI`, async ({
       wikiPage,
       request,
     }) => {

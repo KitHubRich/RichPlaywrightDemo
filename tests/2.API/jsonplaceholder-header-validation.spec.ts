@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 
-test('Request contains bearer token header', async ({ request }) => {
+test('@api @headers Request contains bearer token header', async ({
+  request,
+}) => {
 
   const response = await request.get(
     'https://jsonplaceholder.typicode.com/posts/1',
@@ -17,7 +19,9 @@ test('Request contains bearer token header', async ({ request }) => {
 
 });
 
-test('Response contains expected headers', async ({ request }) => {
+test('@api @headers Response contains expected headers', async ({
+  request,
+}) => {
 
   const response = await request.get(
     'https://jsonplaceholder.typicode.com/posts/1'

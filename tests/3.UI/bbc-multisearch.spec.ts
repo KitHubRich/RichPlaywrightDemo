@@ -30,7 +30,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 searchTerms.forEach((searchTerm) => {
-  test(`BBC search returns ${searchTerm} results`, async ({ page }) => {
+  test(`@smoke @ui @bbc BBC search returns ${searchTerm} results`, async ({ page }) => {
     const searchBox = page.locator('input').first();
 
     await searchBox.fill(searchTerm);

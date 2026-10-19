@@ -58,9 +58,9 @@ async function getComments(
 }
 
 for (const postId of postIds) {
-  test(`Chain post ${postId} to user and todos`, async ({
-    request,
-  }) => {
+  test(`@api @chaining Chain post ${postId} to user and todos`, async ({
+  request,
+}) => {
 
 const postBody =
   await getPost(request, postId);

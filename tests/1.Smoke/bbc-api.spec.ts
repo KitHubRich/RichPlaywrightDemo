@@ -7,7 +7,7 @@ const pages = [
 ];
 
 for (const url of pages) {
-  test(`${url} returns 200`, async ({ request }) => {
+  test(`@smoke ${url} returns 200`, async ({ request }) => {
     const response = await request.get(url);
 
     expect(response.status()).toBe(200);
