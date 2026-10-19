@@ -25,7 +25,7 @@ test.describe('Wikipedia Category Regression', () => {
       for (const article of articles) {
 
         test(
-  `@regression @ui @wiki ${article} loads successfully`,
+  `@regression @ui ${article} loads successfully`,
   async ({ wikiPage }) => {
 
             await wikiPage.gotoArticle(article);

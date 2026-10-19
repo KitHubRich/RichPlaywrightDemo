@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 const BASE_URL = 'https://jsonplaceholder.typicode.com';
 
-test.describe('@api @validation @regression GET Post Validation', () => {
+test.describe('@api @regression GET Post Validation', () => {
 
   let body: any;
 
@@ -49,7 +49,7 @@ test.describe('@api @validation @regression GET Post Validation', () => {
 
 });
 
-test.describe('@api @crud POST Validation', () => {
+test.describe('@api @regression POST Validation', () => {
 
   let postBody: any;
 
@@ -97,7 +97,7 @@ test.describe('@api @crud POST Validation', () => {
 
 });
 
-test.describe('@api @crud PUT Validation', () => {
+test.describe('@api @regression PUT Validation', () => {
 
   let putBody: any;
 
@@ -146,7 +146,7 @@ test.describe('@api @crud PUT Validation', () => {
 
 });
 
-test.describe('@api @crud DELETE Validation', () => {
+test.describe('@api @regression DELETE Validation', () => {
 
   let response: any;
 
@@ -180,7 +180,7 @@ test.describe('@api @crud DELETE Validation', () => {
 
 });
 
-test.describe('@api @negative GET Negative Validation', () => {
+test.describe('@api @regression GET Negative Validation', () => {
 
   test('Invalid post ID returns empty object', async ({
     request,
@@ -198,7 +198,7 @@ test.describe('@api @negative GET Negative Validation', () => {
 
 });
 
-test('@api @negative Invalid post has no title property', async ({ request }) => {
+test('@api @regression Invalid post has no title property', async ({ request }) => {
 
   const response = await request.get(
     `${BASE_URL}/posts/999999`
@@ -210,7 +210,7 @@ test('@api @negative Invalid post has no title property', async ({ request }) =>
 
 });
 
-test('@api @negative Invalid post has no user ID', async ({ request }) => {
+test('@api @regression Invalid post has no user ID', async ({ request }) => {
 
   const response = await request.get(
     `${BASE_URL}/posts/999999`
@@ -222,7 +222,7 @@ test('@api @negative Invalid post has no user ID', async ({ request }) => {
 
 });
 
-test('@api @negative Invalid post response is an object', async ({ request }) => {
+test('@api @regression Invalid post response is an object', async ({ request }) => {
 
   const response = await request.get(
     `${BASE_URL}/posts/999999`
@@ -234,7 +234,7 @@ test('@api @negative Invalid post response is an object', async ({ request }) =>
 
 });
 
-test('@api @negative Invalid endpoint returns 404', async ({ request }) => {
+test('@api @regression Invalid endpoint returns 404', async ({ request }) => {
 
   const response = await request.get(
     `${BASE_URL}/not-a-real-endpoint`
@@ -244,7 +244,7 @@ test('@api @negative Invalid endpoint returns 404', async ({ request }) => {
 
 });
 
-test('@api @negative String ID returns empty response', async ({ request }) => {
+test('@api @regression String ID returns empty response', async ({ request }) => {
 
   const response = await request.get(
     `${BASE_URL}/posts/abc`
@@ -257,7 +257,7 @@ test('@api @negative String ID returns empty response', async ({ request }) => {
 });
 
 
-test('@api @negative POST with missing fields', async ({ request }) => {
+test('@api @regression POST with missing fields', async ({ request }) => {
 
   const response = await request.post(
     `${BASE_URL}/posts`,
@@ -272,7 +272,7 @@ test('@api @negative POST with missing fields', async ({ request }) => {
 
 });
 
-test('@api @negative POST with invalid userId type', async ({ request }) => {
+test('@api @regression POST with invalid userId type', async ({ request }) => {
 
   const response = await request.post(
     `${BASE_URL}/posts`,

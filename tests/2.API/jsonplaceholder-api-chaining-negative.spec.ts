@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 const BASE_URL =
   'https://jsonplaceholder.typicode.com';
 
-test('@api @negative @regression Invalid post returns empty response', async ({
+test('@api @regression Invalid post returns empty response', async ({
   request,
 }) => {
 
@@ -19,7 +19,7 @@ test('@api @negative @regression Invalid post returns empty response', async ({
 
 });
 
-test('@api @negative Invalid user returns empty response', async ({
+test('@api @regression Invalid user returns empty response', async ({
   request,
 }) => {
 
@@ -35,7 +35,7 @@ test('@api @negative Invalid user returns empty response', async ({
 
 });
 
-test('@api @negative Invalid todo returns empty response', async ({
+test('@api @regression Invalid todo returns empty response', async ({
   request,
 }) => {
 
@@ -51,7 +51,7 @@ test('@api @negative Invalid todo returns empty response', async ({
 
 });
 
-test('@api @negative Invalid endpoint returns 404', async ({
+test('@api @regression Invalid endpoint returns 404', async ({
   request,
 }) => {
 ``
@@ -64,7 +64,7 @@ test('@api @negative Invalid endpoint returns 404', async ({
 
 });
 
-test('@api @negative Invalid post has no title', async ({
+test('@api @regression Invalid post has no title', async ({
   request,
 }) => {
 
@@ -78,7 +78,7 @@ test('@api @negative Invalid post has no title', async ({
 
 });
 
-test('@api @negative Invalid post has no user ID', async ({
+test('@api @regression Invalid post has no user ID', async ({
   request,
 }) => {
 
@@ -92,7 +92,7 @@ test('@api @negative Invalid post has no user ID', async ({
 
 });
 
-test('@api @negative Invalid post returns empty object', async ({
+test('@api @regression Invalid post returns empty object', async ({
   request,
 }) => {
 

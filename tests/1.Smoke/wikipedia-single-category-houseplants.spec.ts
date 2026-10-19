@@ -7,7 +7,7 @@ import {
 const houseplants =
   getArticlesByCategory('houseplants');
 
-test.describe('@smoke @ui @wiki Houseplants', () => {
+test.describe('@smoke Houseplants', () => {
 
   for (const plant of houseplants) {
 

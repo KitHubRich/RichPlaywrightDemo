@@ -10,7 +10,7 @@ test.beforeEach(async ({ page }) => {
   }
 });
 
-test('@smoke @bbc @ui BBC homepage displays News, Sport and Weather links', async ({ page }) => {
+test('@smoke @bbc BBC homepage displays News, Sport and Weather links', async ({ page }) => {
   await expect(
     page.getByRole('link', { name: 'News' }).first()
   ).toBeVisible();
@@ -24,7 +24,7 @@ test('@smoke @bbc @ui BBC homepage displays News, Sport and Weather links', asyn
   ).toBeVisible();
 });
 
-test('@smoke BBC Sport navigates to Tennis', async ({ page }) => {
+test('@smoke @bbc BBC Sport navigates to Tennis', async ({ page }) => {
 
   await expect(
     page.getByRole('link', { name: 'Sport' }).first()

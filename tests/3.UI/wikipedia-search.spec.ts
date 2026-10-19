@@ -6,7 +6,7 @@ test.beforeEach(async ({
   await wikiPage.goto();
 });
 
-test('@smoke @ui @wiki Search Carlos Alcaraz', async ({
+test('@regression @ui Search Carlos Alcaraz', async ({
   wikiPage,
 }) => {
 
@@ -19,7 +19,7 @@ test('@smoke @ui @wiki Search Carlos Alcaraz', async ({
   );
 });
 
-test('@ui @wiki @regression Search Emma Raducanu', async ({
+test('@regression @ui Search Emma Raducanu', async ({
   wikiPage,
 }) => {
 

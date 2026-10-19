@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 const BASE_URL = 'https://jsonplaceholder.typicode.com';
 
-test('@api @crud @regression GET post returns correct data', async ({
+test('@api @regression GET post returns correct data', async ({
   request,
 }) => {
   const response = await request.get(
@@ -17,7 +17,7 @@ test('@api @crud @regression GET post returns correct data', async ({
   expect(body.userId).toBe(1);
 });
 
-test('@api @crud POST creates a new post', async ({
+test('@api @regression POST creates a new post', async ({
   request,
 }) => {
   const response = await request.post(
@@ -39,7 +39,7 @@ test('@api @crud POST creates a new post', async ({
   expect(body.userId).toBe(99);
 });
 
-test('@api @crud PUT updates an existing post', async ({
+test('@api @regression PUT updates an existing post', async ({
   request,
 }) => {
   const response = await request.put(
@@ -61,7 +61,7 @@ test('@api @crud PUT updates an existing post', async ({
   expect(body.title).toBe('Updated Title');
 });
 
-test('@api @crud DELETE removes a post', async ({
+test('@api @regression DELETE removes a post', async ({
   request,
 }) => {
   const response = await request.delete(
