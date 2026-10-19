@@ -2,16 +2,16 @@ name: Playwright Regression Tests
 
 on:
   workflow_dispatch:
-inputs:
-  workers:
-    description: 'Number of Playwright workers'
-    required: true
-    default: '1'
+    inputs:
+      workers:
+        description: 'Number of Playwright workers'
+        required: true
+        default: '1'
 
-  headed:
-    description: 'Run headed'
-    required: true
-    default: 'false'
+      headed:
+        description: 'Run headed'
+        required: true
+        default: 'false'
 
 jobs:
   test:
