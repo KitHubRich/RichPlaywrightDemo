@@ -12,11 +12,6 @@ on:
         required: true
         default: '1'
 
-      headed:
-        description: 'Run headed'
-        required: true
-        default: 'false'
-
 jobs:
   test:
     runs-on: ubuntu-latest
