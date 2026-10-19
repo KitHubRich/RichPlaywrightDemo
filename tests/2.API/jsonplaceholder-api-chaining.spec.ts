@@ -1,11 +1,15 @@
-import { test, expect } from '@playwright/test';
+import {
+  test,
+  expect,
+  APIRequestContext,
+} from '@playwright/test';
 
 const BASE_URL = 'https://jsonplaceholder.typicode.com';
 
 const postIds = [1, 25, 50, 75, 100];
 
 async function getJson(
-  request: any,
+  request: APIRequestContext,
   endpoint: string
 ) {
   const response = await request.get(
@@ -18,7 +22,7 @@ async function getJson(
 }
 
 async function getUser(
-  request: any,
+  request: APIRequestContext,
   userId: number
 ) {
   return getJson(
@@ -28,7 +32,7 @@ async function getUser(
 }
 
 async function getTodos(
-  request: any,
+  request: APIRequestContext,
   userId: number
 ) {
   return getJson(
@@ -38,7 +42,7 @@ async function getTodos(
 }
 
 async function getPost(
-  request: any,
+  request: APIRequestContext,
   postId: number
 ) {
   return getJson(
@@ -48,7 +52,7 @@ async function getPost(
 }
 
 async function getComments(
-  request: any,
+  request: APIRequestContext,
   postId: number
 ) {
   return getJson(
