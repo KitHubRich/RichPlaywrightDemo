@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test(
-  '@api @ui @hybrid Get user via API then display in browser',
+  '@hybrid Get user via API then display in browser',
   async ({
     page,
     request,

@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { getWikiSummary } from '../../services/wiki-service';
 
-test('@smoke @api @ui @hybrid @wiki Wikipedia API title matches UI title', async ({
+test('@smoke @hybrid @wiki Wikipedia API title matches UI title', async ({
   page,
   request,
 }) => {

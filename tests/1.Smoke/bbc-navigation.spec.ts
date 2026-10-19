@@ -10,7 +10,7 @@ test.beforeEach(async ({ page }) => {
   }
 });
 
-test('@smoke BBC homepage displays News, Sport and Weather links', async ({ page }) => {
+test('@smoke @bbc @ui BBC homepage displays News, Sport and Weather links', async ({ page }) => {
   await expect(
     page.getByRole('link', { name: 'News' }).first()
   ).toBeVisible();

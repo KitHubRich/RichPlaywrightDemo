@@ -7,11 +7,11 @@ import {
 const houseplants =
   getArticlesByCategory('houseplants');
 
-test.describe('@smoke Houseplants', () => {
+test.describe('@smoke @ui @wiki Houseplants', () => {
 
   for (const plant of houseplants) {
 
-  test(`@smoke ${plant} loads successfully`,
+  test(`${plant} loads successfully`,
       async ({ page }) => {
 
         await page.goto(

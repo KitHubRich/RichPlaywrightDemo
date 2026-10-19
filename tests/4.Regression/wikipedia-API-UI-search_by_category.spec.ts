@@ -1,7 +1,7 @@
 import { test } from '../../fixtures/wiki-fixtures';
 import { getArticlesByCategory } from '../../services/wiki-service';
 
-test('@regression @ui @wiki Wikipedia category articles load successfully', async ({
+test('@regression @hybrid @wiki Wikipedia category articles load successfully', async ({
   wikiPage,
 }) => {
 

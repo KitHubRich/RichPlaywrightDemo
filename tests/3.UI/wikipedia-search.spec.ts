@@ -19,7 +19,7 @@ test('@smoke @ui @wiki Search Carlos Alcaraz', async ({
   );
 });
 
-test('@smoke @ui @wiki Search Emma Raducanu', async ({
+test('@ui @wiki Search Emma Raducanu', async ({
   wikiPage,
 }) => {
 
