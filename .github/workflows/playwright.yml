@@ -1,4 +1,4 @@
-name: All Playwright Tests
+name: Playwright Tests
 
 on:
   push:
