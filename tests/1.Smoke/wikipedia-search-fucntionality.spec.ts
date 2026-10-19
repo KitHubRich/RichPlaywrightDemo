@@ -1,6 +1,6 @@
 import { test } from '../../fixtures/wiki-fixtures';
 
-test('@smoke Fixture learning', async ({
+test('@smoke @ui Wikipedia search returns expected article', async ({
   homePage,
   articlePage,
 }) => {
@@ -12,5 +12,4 @@ test('@smoke Fixture learning', async ({
   await articlePage.expectHeading(
     'Carlos Alcaraz'
   );
-
 });
