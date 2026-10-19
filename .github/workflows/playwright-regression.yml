@@ -23,7 +23,7 @@ jobs:
 
       - run: npx playwright install --with-deps
 
-      - run: npx playwright test --grep-invert @smoke
+      - run: npx playwright test --grep @regression
 
       - name: Upload Playwright Report
         uses: actions/upload-artifact@v4
