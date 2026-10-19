@@ -16,7 +16,7 @@ const movies = [
 
 for (const movie of movies) {
 
-  test(`@ui @validation Search for ${movie}`, async ({
+  test(`@ui @validation @regression Search for ${movie}`, async ({
     page,
   }) => {
 

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('@api @headers Request contains bearer token header', async ({
+test('@api @headers @regression Request contains bearer token header', async ({
   request,
 }) => {
 

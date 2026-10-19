@@ -16,7 +16,7 @@ const invalidPosts = [
 ];
 
 for (const postId of validPosts) {
-  test(`@api @validation Valid Post ${postId} returns data`, async ({ request }) => {
+  test(`@api @validation @regression Valid Post ${postId} returns data`, async ({ request }) => {
     const response = await request.get(
       `https://jsonplaceholder.typicode.com/posts/${postId}`
     );

@@ -22,7 +22,7 @@ const movies = [
 
 for (const movie of movies) {
 
-  test(`@ui @navigation ${movie} article loads`, async ({
+  test(`@ui @navigation @regression ${movie} article loads`, async ({
     page,
   }) => {
 

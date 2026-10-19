@@ -62,7 +62,7 @@ async function getComments(
 }
 
 for (const postId of postIds) {
-  test(`@api @chaining Chain post ${postId} to user and todos`, async ({
+  test(`@api @chaining @regression Chain post ${postId} to user and todos`, async ({
   request,
 }) => {
 

@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 const BASE_URL = 'https://jsonplaceholder.typicode.com';
 
-test.describe('@api @validation GET Post Validation', () => {
+test.describe('@api @validation @regression GET Post Validation', () => {
 
   let body: any;
 

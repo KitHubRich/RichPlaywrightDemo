@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 const BASE_URL =
   'https://jsonplaceholder.typicode.com';
 
-test('@api @negative Invalid post returns empty response', async ({
+test('@api @negative @regression Invalid post returns empty response', async ({
   request,
 }) => {
 

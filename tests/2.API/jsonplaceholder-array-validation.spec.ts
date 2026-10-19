@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('@api @validation Posts endpoint returns an array', async ({ request }) => {
+test('@api @validation @regression Posts endpoint returns an array', async ({ request }) => {
   const response = await request.get(
     'https://jsonplaceholder.typicode.com/posts'
   );
