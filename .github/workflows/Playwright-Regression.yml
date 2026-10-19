@@ -20,4 +20,4 @@ jobs:
 
       - run: npx playwright install --with-deps
 
-      - run: npx playwright test --grep @regression
+      - run: npx playwright test --grep-invert @smoke
