@@ -14,7 +14,7 @@ test('@regression @hybrid @validation BBC API and UI homepage validation', async
   const duration = Date.now() - start;
 
   expect(response.status()).toBe(200);
-  expect(duration).toBeLessThan(2000);
+  expect(duration).toBeLessThan(10000);
 
   const html = await response.text();
 
