@@ -67,7 +67,7 @@ export function getDirectors() {
 export function getActors() {
   return [
     'Brad_Pitt',
-    'Margaret_Qualley',
+    'Sandra_Bullock',
     'Keanu_Reeves',
   ];
 }
