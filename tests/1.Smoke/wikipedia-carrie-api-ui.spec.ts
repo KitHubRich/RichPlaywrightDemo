@@ -7,7 +7,7 @@ test('@smoke Wikipedia API title matches UI title', async ({
 }) => {
 const body = await getWikiSummary(
   request,
-  'Carrie'
+  'Carrie 2026'
 );
 
   await page.goto(
@@ -32,12 +32,12 @@ await expect(heading)
 await expect(heading)
   .toHaveText(body.title);
 
-console.log('Checking for 2026 miniseries...');
+console.log('Checking for tv series...');
 
 await expect(
   page.locator('#mw-content-text')
-).toContainText('2026 miniseries');
+).toContainText(body.description);
 
-console.log('2026 miniseries found!');
+console.log('tv series found!');
 
 });
