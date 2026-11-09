@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
+import { urls } from '../../config/urls';
 
-const BASE_URL = 'https://jsonplaceholder.typicode.com';
+const BASE_URL =
+  urls.jsonPlaceholder.base;
 
 test.describe('@api @regression GET Post Validation', () => {
 

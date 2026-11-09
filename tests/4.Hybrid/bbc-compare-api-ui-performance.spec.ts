@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { urls } from '../../config/urls';
 
 test('@regression @hybrid @bbc BBC homepage responds and loads', async ({
   page,
@@ -8,7 +9,8 @@ test('@regression @hybrid @bbc BBC homepage responds and loads', async ({
   const start = Date.now();
 
   const response = await request.get(
-    'https://www.bbc.co.uk/'
+    urls.bbc.home
+
   );
 
   const duration =
@@ -20,7 +22,7 @@ test('@regression @hybrid @bbc BBC homepage responds and loads', async ({
     .toBeLessThan(3000);
 
   await page.goto(
-    'https://www.bbc.co.uk/'
+    urls.bbc.home
   );
 
   await expect(page)

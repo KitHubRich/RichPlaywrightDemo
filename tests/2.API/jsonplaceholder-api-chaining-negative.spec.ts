@@ -1,7 +1,9 @@
 import { test, expect } from '@playwright/test';
+import { urls } from '../../config/urls';
 
 const BASE_URL =
-  'https://jsonplaceholder.typicode.com';
+  urls.jsonPlaceholder.base
+;
 
 test('@api @regression Invalid post returns empty response', async ({
   request,

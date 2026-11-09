@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { urls } from '../../config/urls';
 
 const validPosts = [
   1, 2, 3, 4, 5,
@@ -18,7 +19,7 @@ const invalidPosts = [
 for (const postId of validPosts) {
   test(`@api @regression Valid Post ${postId} returns data`, async ({ request }) => {
     const response = await request.get(
-      `https://jsonplaceholder.typicode.com/posts/${postId}`
+      `${urls.jsonPlaceholder.posts}/${postId}`
     );
 
     const body = await response.json();
@@ -43,7 +44,8 @@ for (const postId of invalidPosts) {
     request,
   }) => {
     const response = await request.get(
-      `https://jsonplaceholder.typicode.com/posts/${postId}`
+      `${urls.jsonPlaceholder.posts}/${postId}`
+
     );
 
     const responseText = await response.text();

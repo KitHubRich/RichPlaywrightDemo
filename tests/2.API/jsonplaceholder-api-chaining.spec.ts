@@ -4,7 +4,10 @@ import {
   APIRequestContext,
 } from '@playwright/test';
 
-const BASE_URL = 'https://jsonplaceholder.typicode.com';
+import { urls } from '../../config/urls';
+
+const BASE_URL =
+  urls.jsonPlaceholder.base;
 
 const postIds = [1, 25, 50, 75, 100];
 

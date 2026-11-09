@@ -1,7 +1,9 @@
 import { test, expect } from '@playwright/test';
 
+import { urls } from '../../config/urls';
+
 test.beforeEach(async ({ page }) => {
-  await page.goto('https://www.bbc.co.uk/');
+  await page.goto(urls.bbc.home);
 
   const acceptButton = page.getByTestId('accept-button');
 

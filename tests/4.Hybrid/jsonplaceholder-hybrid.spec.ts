@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { urls } from '../../config/urls';
 
 test(
   '@hybrid @regression Get user via API then display in browser',
@@ -8,7 +9,7 @@ test(
   }) => {
 
   const response = await request.get(
-    'https://jsonplaceholder.typicode.com/users/1'
+    `${urls.jsonPlaceholder.users}/1`
   );
 
   const user = await response.json();
@@ -16,7 +17,7 @@ test(
   console.log(user.name);
 
   await page.goto(
-    'https://jsonplaceholder.typicode.com/users/1'
+    `${urls.jsonPlaceholder.users}/1`
   );
 
   await expect(page.locator('body'))

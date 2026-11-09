@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 
+import { urls } from '../../config/urls';
+
 // bbc multisearch
 
 const searchTerms = [
@@ -10,7 +12,8 @@ const searchTerms = [
 ];
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('https://www.bbc.co.uk/', {
+  await page.goto(urls.bbc.home, {
+
     waitUntil: 'domcontentloaded',
   });
 
@@ -20,7 +23,7 @@ test.beforeEach(async ({ page }) => {
     await acceptButton.click();
   }
 
-  await page.goto('https://www.bbc.co.uk/search', {
+  await page.goto(urls.bbc.search, {
     waitUntil: 'domcontentloaded',
   });
 

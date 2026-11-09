@@ -1,11 +1,12 @@
 import { test, expect } from '@playwright/test';
+import { urls } from '../../config/urls';
 
 test('@api @regression Request contains bearer token header', async ({
   request,
 }) => {
 
   const response = await request.get(
-    'https://jsonplaceholder.typicode.com/posts/1',
+    `${urls.jsonPlaceholder.posts}/1`,
     {
       headers: {
   'Rich-Test-Header': 'RichPlaywright',
@@ -24,7 +25,8 @@ test('@api @regression Response contains expected headers', async ({
 }) => {
 
   const response = await request.get(
-    'https://jsonplaceholder.typicode.com/posts/1'
+    `${urls.jsonPlaceholder.posts}/1`
+    
   );
 
   const headers = response.headers();
