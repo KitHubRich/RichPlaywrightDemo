@@ -2,57 +2,58 @@ import { test } from '../../fixtures/wiki-fixtures';
 
 import {
   getWikiSummary,
-  getWikiArticles
+  getWikiArticles,
 } from '../../services/wiki-service';
 
 test.describe('Wikipedia API UI Validation', () => {
-
   const articles = getWikiArticles();
 
   for (const article of articles) {
-
-    test(`@hybrid @regression ${article} API matches UI`, async ({
-      wikiPage,
-      request,
-    }) => {
-
-      const body = await getWikiSummary(
+    test(
+      `@hybrid @regression ${article} API matches UI`,
+      async ({
+        articlePage,
+        page,
         request,
-        article
-      );
+      }) => {
+        const body = await getWikiSummary(
+          request,
+          article
+        );
 
-      await wikiPage.gotoUrl(
-        body.content_urls.desktop.page
-      );
+        await page.goto(
+          body.content_urls.desktop.page
+        );
 
-      await wikiPage.expectUrl(
-        body.content_urls.desktop.page
-      );
+        await articlePage.expectUrl(
+          body.content_urls.desktop.page
+        );
 
-      const uiTitle =
-        await wikiPage.getHeadingText();
+        const uiTitle =
+          await articlePage.getHeadingText();
 
-      console.log('Article:', article);
-      console.log('Description:', body.description);
-      console.log('API Title:', body.title);
-      console.log('UI Title:', uiTitle);
+        console.log('Article:', article);
+        console.log('Description:', body.description);
+        console.log('API Title:', body.title);
+        console.log('UI Title:', uiTitle);
 
-      await wikiPage.expectHeadingVisible();
+        await articlePage.expectHeadingVisible();
 
-      await wikiPage.expectHeadingText(
-        body.title
-      );
+        await articlePage.expectHeading(
+          body.title
+        );
 
-      console.log(
-        'Checking description:',
-        body.description
-      );
+        console.log(
+          'Checking description:',
+          body.description
+        );
 
-      await wikiPage.expectPageContains(
-        body.description
-      );
+        await articlePage.expectPageContains(
+          body.description
+        );
 
-      console.log('Description found!');
-    });
+        console.log('Description found!');
+      }
+    );
   }
 });

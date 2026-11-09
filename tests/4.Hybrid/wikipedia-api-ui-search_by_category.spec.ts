@@ -2,7 +2,7 @@ import { test } from '../../fixtures/wiki-fixtures';
 import { getArticlesByCategory } from '../../services/wiki-service';
 
 test('@regression @hybrid Wikipedia category articles load successfully', async ({
-  wikiPage,
+  articlePage,
 }) => {
 
   const category = 'movies';
@@ -12,8 +12,8 @@ test('@regression @hybrid Wikipedia category articles load successfully', async 
   console.log(`Testing category: ${category}`);
 
   for (const article of articles) {
-    await wikiPage.gotoArticle(article);
-    await wikiPage.expectHeadingVisible();
+    await articlePage.gotoArticle(article);
+    await articlePage.expectHeadingVisible();
 
     console.log(`Checked ${article}`);
   }

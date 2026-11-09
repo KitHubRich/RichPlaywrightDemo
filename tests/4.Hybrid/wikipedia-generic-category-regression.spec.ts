@@ -25,12 +25,12 @@ test.describe('Wikipedia Category Regression', () => {
       for (const article of articles) {
 
         test(
-  `@regression @ui ${article} loads successfully`,
-  async ({ wikiPage }) => {
+          `@regression @ui ${article} loads successfully`,
+          async ({ articlePage }) => {
 
-            await wikiPage.gotoArticle(article);
+            await articlePage.gotoArticle(article);
 
-            await wikiPage.expectHeadingVisible();
+            await articlePage.expectHeadingVisible();
 
             console.log(
               `Category: ${category}`
@@ -41,7 +41,7 @@ test.describe('Wikipedia Category Regression', () => {
             );
 
             const heading =
-              await wikiPage.getHeadingText();
+              await articlePage.getHeadingText();
 
             console.log(
               `Heading: ${heading}`
