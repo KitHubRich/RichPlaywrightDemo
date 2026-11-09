@@ -1,5 +1,7 @@
 import { Page } from '@playwright/test';
 
+import { urls } from '../config/urls';
+
 export class WikipediaHomePage {
   readonly page: Page;
 
@@ -9,8 +11,8 @@ export class WikipediaHomePage {
 
   async goto() {
     await this.page.goto(
-      'https://en.wikipedia.org'
-    );
+  urls.wikipedia.home
+);
   }
 
   async searchFor(article: string) {

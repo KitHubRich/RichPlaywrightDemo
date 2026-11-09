@@ -1,5 +1,7 @@
 import { expect, Page } from '@playwright/test';
 
+import { urls } from '../config/urls';
+
 export class WikipediaArticlePage {
   readonly page: Page;
 
@@ -9,8 +11,9 @@ export class WikipediaArticlePage {
 
   async gotoArticle(article: string) {
     await this.page.goto(
-      `https://en.wikipedia.org/wiki/${article}`
-    );
+  `${urls.wikipedia.article}${article}`
+);
+
   }
 
   async expectHeading(expectedTitle: string) {

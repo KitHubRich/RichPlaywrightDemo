@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 
+import { urls } from '../../config/urls';
+
 import {
   getArticlesByCategory,
 } from '../../services/wiki-service';
@@ -15,7 +17,7 @@ test.describe('@smoke Houseplants', () => {
       async ({ page }) => {
 
         await page.goto(
-          `https://en.wikipedia.org/wiki/${plant}`
+          `${urls.wikipedia.article}${plant}`
         );
 
         await expect(

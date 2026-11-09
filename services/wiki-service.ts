@@ -3,12 +3,14 @@ import {
   expect,
 } from '@playwright/test';
 
+import { urls } from '../config/urls';
+
 export async function getWikiSummary(
   request: APIRequestContext,
   article: string
 ) {
   const url =
-    `https://en.wikipedia.org/api/rest_v1/page/summary/${article}`;
+    `${urls.wikipedia.api}${article}`;
 
   let response;
 

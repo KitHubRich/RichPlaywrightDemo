@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 
+import { urls } from '../../config/urls';
+
 //test movie search
 
 
@@ -27,7 +29,7 @@ for (const movie of movies) {
   }) => {
 
     await page.goto(
-      `https://en.wikipedia.org/wiki/${movie}`
+      `${urls.wikipedia.article}${movie}`
     );
 
 const heading =
