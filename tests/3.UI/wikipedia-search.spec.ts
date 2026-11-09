@@ -1,33 +1,31 @@
 import { test } from '../../fixtures/wiki-fixtures';
 
-test.beforeEach(async ({
-  wikiPage,
-}) => {
-  await wikiPage.goto();
+test.beforeEach(async ({ homePage }) => {
+  await homePage.goto();
 });
 
 test('@regression @ui Search Carlos Alcaraz', async ({
-  wikiPage,
+  homePage,
+  articlePage,
 }) => {
-
-  await wikiPage.searchFor(
+  await homePage.searchFor(
     'Carlos Alcaraz'
   );
 
-  await wikiPage.expectHeading(
+  await articlePage.expectHeading(
     'Carlos Alcaraz'
   );
 });
 
 test('@regression @ui Search Emma Raducanu', async ({
-  wikiPage,
+  homePage,
+  articlePage,
 }) => {
-
-  await wikiPage.searchFor(
+  await homePage.searchFor(
     'Emma Raducanu'
   );
 
-  await wikiPage.expectHeading(
+  await articlePage.expectHeading(
     'Emma Raducanu'
   );
 });
